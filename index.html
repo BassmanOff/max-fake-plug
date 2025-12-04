@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=no">
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <title>Макс</title>
+  <link rel="apple-touch-icon" href="https://max.ru/s/img/big-logo.png">
+
+  <style>
+    body {
+      margin:0;
+      font-family:-apple-system,Arial;
+      background:white;
+      height:100vh;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      overflow:hidden;
+    }
+
+    /* -----------------------------------------------------------
+       1) SPLASH (0 — 3.5 сек)
+    ----------------------------------------------------------- */
+    #splash {
+      position:absolute;
+      inset:0;
+      display:flex;
+      justify-content:center;
+      align-items:center;
+      background:white;
+      opacity:1;
+      animation: splashFade 1.5s linear forwards 2s;
+    }
+    @keyframes splashFade {
+      0%   {opacity:1;}
+      100% {opacity:0; visibility:hidden;}
+    }
+
+    /* -----------------------------------------------------------
+       2) LOADING (3.5 — 9.5 сек)
+    ----------------------------------------------------------- */
+    #loading {
+      position:absolute;
+      top:50%; left:50%;
+      transform:translate(-50%,-50%);
+      text-align:center;
+      font-size:20px;
+      color:#444;
+
+      opacity:0;
+      visibility:hidden;
+      animation:
+        loadingShow 0.01s linear forwards 3.5s,
+        loadingHide 0.01s linear forwards 9.5s;
+    }
+
+    /* показать в 3.5 сек */
+    @keyframes loadingShow {
+      from {opacity:0; visibility:hidden;}
+      to   {opacity:1; visibility:visible;}
+    }
+
+    /* скрыть в 9.5 сек */
+    @keyframes loadingHide {
+      from {opacity:1; visibility:visible;}
+      to   {opacity:0; visibility:hidden;}
+    }
+
+    /* iOS spinner */
+    .spinner {
+      margin:15px auto 0 auto;
+      width:30px; height:30px;
+      border-radius:50%;
+      border:3px solid #ccc;
+      border-top-color:#000;
+      animation: spin 0.8s linear infinite;
+    }
+    @keyframes spin {
+      to {transform:rotate(360deg);}
+    }
+
+    /* -----------------------------------------------------------
+       3) ERROR (с 9.5 сек)
+    ----------------------------------------------------------- */
+    #error {
+      position:absolute;
+      top:50%; left:50%;
+      transform:translate(-50%,-50%);
+      font-size:22px;
+      color:#000;
+
+      opacity:0;
+      visibility:hidden;
+      animation: errorShow 0.01s linear forwards 9.5s;
+    }
+
+    @keyframes errorShow {
+      from {opacity:0; visibility:hidden;}
+      to   {opacity:1; visibility:visible;}
+    }
+  </style>
+</head>
+
+<body>
+
+  <div id="splash">
+    <img src="https://max.ru/s/img/big-logo.png" style="width:120px;height:120px;">
+  </div>
+
+  <div id="loading">
+    Подключение…
+    <div class="spinner"></div>
+  </div>
+
+  <div id="error">Ошибка подключения</div>
+
+</body>
+</html>
